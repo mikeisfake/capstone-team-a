@@ -1,3 +1,10 @@
-html {
-  background: red;
+@use './modules/fonts';
+@use './modules/colors';
+@use './modules/format';
+
+@use './pages/dashboard';
+@use './pages/login';
+
+body {
+  font-family: fonts.$sans-serif;
 }
