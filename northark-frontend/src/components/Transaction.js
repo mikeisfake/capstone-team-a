@@ -29,8 +29,26 @@ export const Transaction = props => {
 
 async function fetchTransactions(user, account, sort){
 
-  let response = await fetch('localhost URL goesh ere');
+  const sortCommand
+
+  let response = await fetch('https://LOCALHOSTBACKENDURLGOESHERE.com?' + new URLSearchParams({
+    username: user,
+    accountnumber: account,
+    sort: sortCommand,
+  }));
   let result = await response.json();
+
+  /*
+  URLSearchParams is basically just a nice way to add the API query to the URL, unless I misunderstand something. 
+  If I did misunderstand something, I can use something else.
+
+  Will have to rewrite the exact arguments of course, based on how the GET function ends up
+  working on the backend, but this is a decent example for now.
+
+  May haev to convert the user prop to a string or something.
+
+  Placeholder sort command for now.
+  */
 
   return response;
 }
