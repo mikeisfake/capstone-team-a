@@ -4,8 +4,14 @@ export const Transaction = props => {
   let [transactionsData, setTransactionsData] = useState("")
 
   useEffect(()=>{
-    fetchTransactions(arguments)
+    fetchTransactions("user", 1, "default")
     .then(value=>setTransactionsData((value)))
+
+    /*
+    Once the parent component wraps this component in context and the context is imported here,
+    you would probably put something like context.user for the user argument of fetchTransactions. 
+    */
+
   
   
   },[])
@@ -21,9 +27,9 @@ export const Transaction = props => {
 
 
 
-async function fetchTransactions(){
+async function fetchTransactions(user, account, sort){
 
-  let response = await fetch('URL');
+  let response = await fetch('localhost URL goesh ere');
   let result = await response.json();
 
   return response;
