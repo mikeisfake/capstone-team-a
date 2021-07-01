@@ -17,7 +17,7 @@ export const Transaction = props => {
   let [transactionsData, setTransactionsData] = useState("")
 
   useEffect(()=>{
-    fetchTransactions("user", 1, "default")
+    fetchTransactions(3, 1, "default")
     .then(value=>setTransactionsData((value)))
 
     /*
@@ -42,7 +42,7 @@ export const Transaction = props => {
 
 
 
-async function fetchTransactions(user, account, sort){
+async function fetchTransactions(userID, account, sort){
 
 
 
@@ -69,10 +69,7 @@ async function fetchTransactions(user, account, sort){
   */
 
 
-  let response = await fetch('https://LOCALHOSTBACKENDURLGOESHERE.com?' + new URLSearchParams({
-    username: user,
-    accountnumber: account,
-  }));
+  let response = await fetch('https://LOCALHOSTBACKENDURLGOESHERE.com/'+userID)
 
   let result = await response.json();
 
@@ -90,7 +87,7 @@ async function fetchTransactions(user, account, sort){
   Would later add "sort: sortCommand," to URLSearchparams.
   */
 
-  return response;
+  return result.account;
 
 }
 
@@ -110,6 +107,7 @@ useEffect(()=>{
 
 Then in the render, 
 you would map over {transactionsData}, probably. Or convert it in some way, if needed.
-
+You cant render {transactinosData} raw by itself, it is an object so React wont render it.
+So it will need to be turned into something else first, which IIRC map does.
 
 */
