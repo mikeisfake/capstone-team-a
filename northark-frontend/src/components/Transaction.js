@@ -1,4 +1,5 @@
 
+import React, { useEffect, useState } from 'react';
 
   /*
   Todo for fetch and the useeffect for it:
@@ -24,6 +25,8 @@ export const Transaction = props => {
     Simple example arguments for now. 3,1, "default" = UserID, account, sort type.
     Once the parent component wraps this component in context and the context is imported here,
     you would probably put something like context.userID for the userID argument of fetchTransactions. 
+
+    Be aware that userID is not username!
 
     Then in the render, 
     you would map over {transactionsData}, probably. Or convert it in some way, if needed.
@@ -61,7 +64,7 @@ async function fetchTransactions(userID, account, sort){
   */
 
 
-  const sortCommand
+  let sortCommand
 
   switch (sort){
     case 'Price-Descending':
@@ -79,7 +82,7 @@ async function fetchTransactions(userID, account, sort){
   May have to convert the userID prop to a string or something.
   The port may not be correct.
   */
-  let response = await fetch('https://localhost:3000/'+userID)
+  let response = await fetch('https://localhost:8000/'+userID)
 
 
   let result = await response.json();
