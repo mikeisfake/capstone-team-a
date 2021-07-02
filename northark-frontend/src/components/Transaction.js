@@ -18,15 +18,14 @@ export const Transaction = props => {
   let [transactionsData, setTransactionsData] = useState("")
 
   useEffect(()=>{
-    fetchTransactions(3, 1, "default")
+    fetchTransactions(user.id, 1, "default")
     .then(value=>setTransactionsData((value)))
 
     /*
-    Simple example arguments for now. 3,1, "default" = UserID, account, sort type.
+    Simple example arguments for now. 1 and "default" correspond to account number and sort type.
     Once the parent component wraps this component in context and the context is imported here,
     you would probably put something like context.userID for the userID argument of fetchTransactions. 
 
-    Be aware that userID is not username!
 
     Then in the render, 
     you would map over {transactionsData}, probably. Or convert it in some way, if needed.
