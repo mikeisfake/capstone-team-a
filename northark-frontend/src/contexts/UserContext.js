@@ -6,8 +6,14 @@ function UserContextProvider (props) {
   const [user, setUser] = useState(null);
   const values = {user, login, logout};
 
-  function login () {
-    setUser('bob')
+  function login (event) {
+    event.preventDefault()
+    let fakeUser = {
+      id: 1,
+      name: 'mike'
+    }
+    setUser(fakeUser)
+    //this function should take some params from the form and do a get to the backend to retireve the user.
   }
 
   function logout () {

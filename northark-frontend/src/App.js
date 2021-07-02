@@ -9,23 +9,11 @@ import { UserContext } from './contexts/UserContext'
 import './styles/index.scss';
 
 function App() {
-  const { user, login, logout } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
       <div className="App">
-        {user  ?
-          <>
-            
-            <Dashboard />
-            <button onClick={logout}>logout</button>
-          </>
-        :
-        <>
-          <Login />
-          <button onClick={login}>login</button>
-        </>
-        }
-
+        {user ? <Dashboard /> : <Login />}
       </div>
 
   );

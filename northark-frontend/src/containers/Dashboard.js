@@ -20,7 +20,8 @@ const Dashboard = () => {
 
   return (
     <div id="dashboard">
-      <h1>{user}'s Accounts Dashboard</h1>
+      <h1>{user.name}'s Accounts Dashboard</h1>
+      <button onClick={logout}>logout</button>
     </div>
   )
 
