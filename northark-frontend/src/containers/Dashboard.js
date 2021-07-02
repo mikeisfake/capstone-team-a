@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../contexts/UserContext'
 
 import AccountList from '../components/AccountList';
 import Transaction from '../components/Transaction'
@@ -8,18 +9,18 @@ const Dashboard = () => {
   const [transactions, setTransactions] = useState([])
   const [accounts, setAccounts] = useState([])
 
+  const { user, logout } = useContext(UserContext);
+
   const getTransactions = async () => {
     let res = await fetch('')
     let data = await res.json()
   }
 
-  useEffect(getTransactions(), [])
+  // useEffect(getTransactions(), [])
 
   return (
     <div id="dashboard">
-      <div className="transactions">
-        { transactions }
-      </div>
+      <h1>{user}'s Accounts Dashboard</h1>
     </div>
   )
 
