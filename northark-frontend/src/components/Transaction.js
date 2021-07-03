@@ -1,12 +1,13 @@
 
+import React, { useEffect, useState } from 'react';
 
   /*
   Todo for fetch and the useeffect for it:
-  Sort switch is just an example for now.
-  Will need to adjust the fetch based on what the backend API expects.
-  Useeffect will probably need context.user passed as the first argument.
-  Misc possible considerations noted below.
+  May need to adjust the fetch based on what the backend API expects. I tried to match it to the latest backend files.
+  Useeffect will probably need context.userID passed as the first argument. Cesar can add that once context is implemented.
 
+  
+  Sort switch is just an example for now.
   */
 
 
@@ -17,14 +18,22 @@ export const Transaction = props => {
   let [transactionsData, setTransactionsData] = useState("")
 
   useEffect(()=>{
-    fetchTransactions("user", 1, "default")
+    fetchTransactions(user.id, 1, "default")
     .then(value=>setTransactionsData((value)))
 
     /*
-    Simple example arguments for now.
+    Simple example arguments for now. 1 and "default" correspond to account number and sort type.
     Once the parent component wraps this component in context and the context is imported here,
-    you would probably put something like context.user for the user argument of fetchTransactions. 
+    you would probably put something like context.userID for the userID argument of fetchTransactions. 
+
+
+    Then in the render, 
+    you would map over {transactionsData}, probably. Or convert it in some way, if needed.
+    You cant render {transactinosData} raw by itself, it is an object so React wont render it.
+    So it will need to be turned into something else first, which IIRC map does.
+    
     */
+
 
   
   
@@ -42,11 +51,19 @@ export const Transaction = props => {
 
 
 
-async function fetchTransactions(user, account, sort){
+async function fetchTransactions(userID, account, sort){
 
 
+  /*
+  This is an example for how the search function may work in the future. 
+  Unused for now.
+  If we do this, will have to decide the sorts, their string names, make sure we have the API commands right, etc.
+  The sort should probably be placed in a separate function, leaving here as a quick example
+  since the sort argument needs to be passed to this function.
+  */
 
-  const sortCommand
+
+  let sortCommand
 
   switch (sort){
     case 'Price-Descending':
@@ -60,56 +77,19 @@ async function fetchTransactions(user, account, sort){
   }
 
   /*
-  The sort should probably be placed in a separate function, leaving here as a quick example
-  since the sort argument needs to be passed to this function.
-
-  Example for how the search function may work in the future. 
-  Unused for now.
-  When we do this, will have to decide the sorts, their string names, make sure we have the API commands right, etc.
+  Not tested, and backend is apparently in flux, so you may need to talk to Yuri/Xiang about proper syntax.
+  May have to convert the userID prop to a string or something.
+  The port may not be correct.
   */
+  let response = await fetch('https://localhost:8000/'+userID)
 
-
-  let response = await fetch('https://LOCALHOSTBACKENDURLGOESHERE.com?' + new URLSearchParams({
-    username: user,
-    accountnumber: account,
-  }));
 
   let result = await response.json();
 
   /*
-  Will need to fill in the proper URL once we have it.
-
-  URLSearchParams is basically just a nice way to add the API query to the URL, unless I misunderstand something. 
-  If I did misunderstand something, I can use something else.
-
-  Will have to rewrite the exact arguments of course, based on how the GET function ends up
-  working on the backend, but this is a decent example for now.
-
-  May have to convert the user prop to a string or something.
-
-  Would later add "sort: sortCommand," to URLSearchparams.
+  Returning a specific account of that userID.
   */
-
-  return response;
+  return result.account;
 
 }
 
-/*
-The way fetchTransactions would probably be integrated into Transaction, or other components,
-would be something like:
-
-
-let [transactionsData, setTransactionsData] = useState("")
-
-useEffect(()=>{
-  fetchTransactions(arguments)
-  .then(value=>setTransactionsData((value)))
-
-
-},[])
-
-Then in the render, 
-you would map over {transactionsData}, probably. Or convert it in some way, if needed.
-
-
-*/
