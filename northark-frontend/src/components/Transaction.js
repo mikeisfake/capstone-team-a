@@ -11,42 +11,42 @@ import React, { useEffect, useState } from 'react';
   */
 
 
-
-export const Transaction = props => {
-
-
-  let [transactionsData, setTransactionsData] = useState("")
-
-  useEffect(()=>{
-    fetchTransactions(user.id, 1, "default")
-    .then(value=>setTransactionsData((value)))
-
-    /*
-    Simple example arguments for now. 1 and "default" correspond to account number and sort type.
-    Once the parent component wraps this component in context and the context is imported here,
-    you would probably put something like context.userID for the userID argument of fetchTransactions. 
+// TO PREVENT APP CRASH
+// export const Transaction = props => {
 
 
-    Then in the render, 
-    you would map over {transactionsData}, probably. Or convert it in some way, if needed.
-    You cant render {transactinosData} raw by itself, it is an object so React wont render it.
-    So it will need to be turned into something else first, which IIRC map does.
+//   let [transactionsData, setTransactionsData] = useState("")
+
+//   useEffect(()=>{
+//     fetchTransactions(user.id, 1, "default")
+//     .then(value=>setTransactionsData((value)))
+
+//     /*
+//     Simple example arguments for now. 1 and "default" correspond to account number and sort type.
+//     Once the parent component wraps this component in context and the context is imported here,
+//     you would probably put something like context.userID for the userID argument of fetchTransactions. 
+
+
+//     Then in the render, 
+//     you would map over {transactionsData}, probably. Or convert it in some way, if needed.
+//     You cant render {transactinosData} raw by itself, it is an object so React wont render it.
+//     So it will need to be turned into something else first, which IIRC map does.
     
-    */
+//     */
 
 
   
   
-  },[])
+//   },[])
   
   
 
-  return (
-    // not sure how to format these but I hate working with tables so maybe a list??
-    // this would be the component for the individual transaction item. Ideally pull transactions from DB and map over them to make this compoennt for each one and pass data as props to this.
-    <li className="transaction-item"></li>
-  )
-}
+//   return (
+//     // not sure how to format these but I hate working with tables so maybe a list??
+//     // this would be the component for the individual transaction item. Ideally pull transactions from DB and map over them to make this compoennt for each one and pass data as props to this.
+//     <li className="transaction-item"></li>
+//   )
+// }
 
 
 
