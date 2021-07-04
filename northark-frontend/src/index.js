@@ -8,7 +8,7 @@ import Table from './components/Table';
 ReactDOM.render(
   <React.StrictMode>
     <Layout>
-      {/* <App /> */}
+      <App />
       <Table />
     </Layout>
   </React.StrictMode>,
