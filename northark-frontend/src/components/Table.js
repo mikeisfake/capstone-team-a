@@ -1,6 +1,27 @@
 import React from 'react';
 import './Table.css';
 
+
+/*
+When replacing the fake data, could do something like this from Transaction.js:
+
+    let [transactionsData, setTransactionsData] = useState("")
+    const { user } = useContext(UserContext);
+  
+    useEffect(()=>{
+      fetchTransactions(user.id, 1, "default")
+      .then(value=>setTransactionsData((value)))
+  
+      //Needs error handling.
+      //Simple example arguments for now. 1 and "default" correspond to account number and sort type.  
+    
+    
+    },[])
+
+
+*/
+
+
 // TEMPORARY, USE TO PASS FAKE DATA
 const DataForTable = () => {
   const data = [
