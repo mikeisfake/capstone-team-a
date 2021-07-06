@@ -19,7 +19,6 @@ const Login = () => {
 
   return(
     <div id="login" className="Front-Container">
-      a
       <form onSubmit={login}>
         <input
           type="text"
@@ -32,11 +31,12 @@ const Login = () => {
           type="password"
           placeholder="password"
           value={password}
+          class="Login-Field"
           onChange={handlePassword}
         />
         <input
           type="submit"
-          value="login"
+          value="Login"
           class="Login-Submit"
         />
         </form>

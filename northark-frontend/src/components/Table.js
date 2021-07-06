@@ -87,7 +87,10 @@ const Table = (props) => {
 
   return (
     <div className="Reports-Container">
-      <div className="Accounts-Container">Accounts</div>
+      <div className="Accounts-Container">Accounts
+        <div><button className="Account">Ark Checkings</button></div>
+        <div><button className="Account">Ark Savings</button></div>
+      </div>
       <div className="Table-Container">
         <h3 id='title'>Account Title</h3>
         <table id='transactions'>
