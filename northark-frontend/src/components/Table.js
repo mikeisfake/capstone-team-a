@@ -81,7 +81,7 @@ const Table = (props) => {
 
   return (
     <div className="Table-Container">
-      <h1 id='title'>Transaction Table</h1>
+      <h2 id='title'>Transaction Table</h2>
       <table id='transactions'>
         <tbody>
           <tr>
