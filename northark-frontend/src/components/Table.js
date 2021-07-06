@@ -1,5 +1,4 @@
 import React from 'react';
-import './Table.css';
 
 
 /*
@@ -79,21 +78,31 @@ const Table = (props) => {
     )
   })
 
+
+  /*
+  Table container and Reports container classes should be moved outside 
+  once we have components actually calling table.
+
+  */
+
   return (
-    <div className="Table-Container">
-      <h2 id='title'>Transaction Table</h2>
-      <table id='transactions'>
-        <tbody>
-          <tr>
-            <th>Date</th>
-            <th>Transaction</th>
-            <th>Credit</th>
-            <th>Debit</th>
-            <th>Balance</th>
-          </tr>
-          {data}
-        </tbody>
-      </table>
+    <div className="Reports-Container">
+      <div className="Accounts-Container">Accounts</div>
+      <div className="Table-Container">
+        <h3 id='title'>Account Title</h3>
+        <table id='transactions'>
+          <tbody>
+            <tr>
+              <th>Date</th>
+              <th>Transaction</th>
+              <th>Credit</th>
+              <th>Debit</th>
+              <th>Balance</th>
+            </tr>
+            {data}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

@@ -23,7 +23,19 @@ body {
 }
 
 nav{
+  background: rgb(27, 54, 90);
+  color: rgb(221, 221, 221);
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  padding: 1rem 2rem 1rem 2rem;
 
+}
+
+nav>h1{
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin: 0;
 }
 
 .Navbar-Logo{
@@ -31,11 +43,16 @@ nav{
 }
 
 .Navbar-Buttons{
-
+  display: grid;
+  grid-auto-flow: column;
+  gap: 2rem;
 }
 
 .Navbar-Button{
-
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
 }
 
 .Front-Container{
@@ -58,13 +75,20 @@ form{
 
 
 
-
-
 /*
 Defines relative layout of the table to
 the account selection area.*/
 .Reports-Container{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  padding: 0 1rem 0 1rem;
 
+
+}
+
+
+.Accounts-Container{
+  text-align: left;
 }
 
 
@@ -76,12 +100,19 @@ sort options */
 }
 
 table{
+text-align: left;
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+width: 100%;
 
 }
 
 /* Data titles, rows, and entries*/
-th{
 
+th, td{
+  padding: 0.75rem;
+}
+
+th{
 }
 
 tr{
@@ -89,6 +120,7 @@ tr{
 }
 
 td{
+  font-size: .8rem;
 
 }
 
