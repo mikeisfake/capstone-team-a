@@ -5,6 +5,101 @@
 @use './pages/dashboard';
 @use './pages/login';
 
-body {
-  font-family: fonts.$sans-serif;
+:root{
+  font-size: 16px;
 }
+
+body {
+
+  font-size: 1rem;
+  color: rgb(27, 27, 27);
+  font-family: Verdana, Arial, Helvetica, sans-serif; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  width: 98vw;
+  margin: auto;
+  text-align: center;
+}
+
+nav{
+
+}
+
+.Navbar-Logo{
+
+}
+
+.Navbar-Buttons{
+
+}
+
+.Navbar-Button{
+
+}
+
+.Front-Container{
+
+}
+
+
+form{
+
+
+}
+
+.Login-Field{
+}
+
+.Login-Submit{
+  
+}
+
+
+
+
+
+
+/*
+Defines relative layout of the table to
+the account selection area.*/
+.Reports-Container{
+
+}
+
+
+/* Table container would hold the table as well as
+the title of the table and its
+sort options */
+.Table-Container{
+
+}
+
+table{
+
+}
+
+/* Data titles, rows, and entries*/
+th{
+
+}
+
+tr{
+
+}
+
+td{
+
+}
+
+
+.Profit{
+  color: green;
+
+}
+
+.Expense{
+  color: red;
+}
+
+

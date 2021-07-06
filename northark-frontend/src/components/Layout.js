@@ -12,7 +12,6 @@ const Layout = ({ children }) => {
         <NavBar />
         { children }
         <footer>
-          Footer
         </footer>
       </div>
     </UserContextProvider>

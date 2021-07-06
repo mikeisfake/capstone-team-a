@@ -72,15 +72,15 @@ const Table = (props) => {
        <tr key={id}>
           <td>{date}</td>
           <td>{transaction}</td>
-          <td>{credit}</td>
-          <td>{debit}</td>
+          <td className="Profit">{credit ? credit : ""}</td>
+          <td className="Expense">{debit ? debit : ""}</td>
           <td>{balance.toFixed(2)}</td>
        </tr>
     )
   })
 
   return (
-    <div>
+    <div className="Table-Container">
       <h1 id='title'>Transaction Table</h1>
       <table id='transactions'>
         <tbody>

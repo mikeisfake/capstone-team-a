@@ -18,12 +18,14 @@ const Login = () => {
   }
 
   return(
-    <div id="login">
+    <div id="login" className="Front-Container">
+      a
       <form onSubmit={login}>
         <input
           type="text"
           placeholder="username"
           value={username}
+          class="Login-Field"
           onChange={handleUsername}
         />
         <input
@@ -35,6 +37,7 @@ const Login = () => {
         <input
           type="submit"
           value="login"
+          class="Login-Submit"
         />
         </form>
       </div>
