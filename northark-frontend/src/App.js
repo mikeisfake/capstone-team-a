@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login';
@@ -12,9 +12,20 @@ function App() {
     //This would be the one instance where I would consider application state (redux) but if we only have 2 pages we can just do this logic twice perhaps? Not the most elegant solution but certainly seems like the least amount of overhead for us.
   }
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <Router>
+        <NavBar />
+        <Login />
+
+        <div className="pages">
+          <Switch>
+            <Route exact path="/" component={} />
+            <Route path="/" component={} />
+            <Route path="/" component={} />
+            <Route path="/" component={} />
+          </Switch>
+        </div>
+      </Router>
+
   );
 }
 
