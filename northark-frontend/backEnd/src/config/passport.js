@@ -5,7 +5,7 @@ const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const { Customers } = require('../models');
+const {Customers, Accounts, Transactions, TransactionTypes, AccountTypes} = require('../models');
 
 passport.use(
     'register',
@@ -104,6 +104,66 @@ passport.use(
             done(null, user);
           } else {
             console.log('user not found in db');
+            done(null, false);
+          }
+        });
+      } catch (err) {
+        done(err);
+      }
+    }),
+  );
+
+  passport.use(
+    'jwt-accounts',
+    new JWTstrategy(opts, (jwt_payload, done) => {
+      try {
+        Customers.findAll({
+          where: {
+            id: jwt_payload.id,
+          },
+          attributes: ['name', 'email','phone'],
+          include: [{model: Accounts, 
+                    attributes: ['id','account_number', 'current_balance', 'available_credit', 'available_balance', 'createdAt'],
+                    include:[{model: AccountTypes, attributes: ['description']}]}]
+        }).then(accounts => {
+          if (accounts) {
+            console.log('accounts found in db in passport');
+            done(null, accounts);
+          } else {
+            console.log('no account found in db');
+            done(null, false);
+          }
+        });
+      } catch (err) {
+        done(err);
+      }
+    }),
+  );
+
+ 
+  passport.use(
+    'jwt-trans',
+    new JWTstrategy(opts, (jwt_payload, done) => {
+      try {
+        Customers.findAll({
+          where: {
+            id: jwt_payload.id,
+          },
+          attributes: ['name', 'email','phone'],
+          include: [{model: Accounts, 
+                    attributes: ['id','account_number', 'current_balance', 'available_credit', 'available_balance', 'createdAt'],
+                    include:[{model: AccountTypes, attributes: ['description']},
+                            {model: Transactions,
+                              attributes: ['id', 'amount', 'createdAt'],
+                              include: [{model: TransactionTypes, attributes: ['description']}]
+                            }
+                          ]}]
+        }).then(trans => {
+          if (trans) {
+            console.log('transactions found in db in passport');
+            done(null, trans);
+          } else {
+            console.log('no transaction found in db');
             done(null, false);
           }
         });
