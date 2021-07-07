@@ -121,7 +121,7 @@ passport.use(
           where: {
             id: jwt_payload.id,
           },
-          attributes: ['name', 'email','phone'],
+          attributes: ['id', 'name', 'email','phone'],
           include: [{model: Accounts, 
                     attributes: ['id','account_number', 'current_balance', 'available_credit', 'available_balance', 'createdAt'],
                     include:[{model: AccountTypes, attributes: ['description']}]}]
@@ -149,7 +149,7 @@ passport.use(
           where: {
             id: jwt_payload.id,
           },
-          attributes: ['name', 'email','phone'],
+          attributes: ['id', 'name', 'email','phone'],
           include: [{model: Accounts, 
                     attributes: ['id','account_number', 'current_balance', 'available_credit', 'available_balance', 'createdAt'],
                     include:[{model: AccountTypes, attributes: ['description']},
