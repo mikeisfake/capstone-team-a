@@ -1,6 +1,6 @@
 import { NavBar } from './NavBar';
 import { useContext } from 'react'
-import UserContextProvider from '../contexts/UserContext';
+import { UserContextProvider } from '../contexts/UserContext';
 
 const Layout = ({ children }) => {
 
