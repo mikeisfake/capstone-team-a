@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import React, { useEffect, useState } from 'react';
+import config from '../config';
 
   /*
 Todo for Yuri/Xiang:
@@ -56,7 +57,26 @@ instead the Table component in Table.js(with fake data supplied) is being direct
     )
   }
 
-
+//I never learned React Hooks (T.T) but this the way I normally do to fetch data from backend
+  const Transaction = () => {
+    let [transactionsData, setTransactionsData] = useState("")
+    const { userID } = useContext(UserContext);
+  
+    useEffect(() => {
+      fetchTransactions(`${config.API_ENDPOINT}/userID/transactions`)
+        .then(value => setTransactionsData((value)))
+        .then((res) => {
+          if (!res.ok) return res.json().then(e => Promise.reject(e));
+          return res.json();
+        })
+        .then((transactions) => {
+          this.setState({ transactions });
+        })
+        .catch(error => {
+          console.error({ error });
+        });
+    })
+  }
 
 
 async function fetchTransactions(userID, account, sort){
@@ -85,8 +105,9 @@ async function fetchTransactions(userID, account, sort){
   }
 
 
-  let response = await fetch('https://localhost:8000/'+userID)
-
+  // let response = await fetch('https://localhost:8000/'+userID)
+  //replaced localhost with heroku URL stored in config.js
+  let response = await fetch(`${config.API_ENDPOINT}/`+userID)
 
   let result = await response.json();
 
