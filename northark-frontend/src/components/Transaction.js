@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import React, { useEffect, useState } from 'react';
+import config from '../config';
 
   /*
 Todo for Yuri/Xiang:
@@ -17,19 +18,19 @@ instead the Table component in Table.js(with fake data supplied) is being direct
   */
 
 
-  export const Transaction = props => {
+  // export const Transaction = props => {
 
-    /*
-    Context API(ie, user.id below) worked last time Jeffrey checked it(july 5, 4pm PST). But double check if things change.
-    */
+  //   /*
+  //   Context API(ie, user.id below) worked last time Jeffrey checked it(july 5, 4pm PST). But double check if things change.
+  //   */
 
 
-    let [transactionsData, setTransactionsData] = useState("")
-    const { user } = useContext(UserContext);
+  //   let [transactionsData, setTransactionsData] = useState("")
+  //   const { user } = useContext(UserContext);
   
-    useEffect(()=>{
-      fetchTransactions(user.id, 1, "default")
-      .then(value=>setTransactionsData((value)))
+  //   useEffect(()=>{
+  //     fetchTransactions(user.id, 1, "default")
+  //     .then(value=>setTransactionsData((value)))
   
       /*
       Simple example arguments for now. 1 and "default" correspond to account number and sort type.  
@@ -45,18 +46,37 @@ instead the Table component in Table.js(with fake data supplied) is being direct
   
     
     
-    },[])
+    // },[])
     
     
   
-    return (
-      // not sure how to format these but I hate working with tables so maybe a list??
-      // this would be the component for the individual transaction item. Ideally pull transactions from DB and map over them to make this compoennt for each one and pass data as props to this.
-      <li className="transaction-item">temporary text{user.id}</li>
-    )
+  //   return (
+  //     // not sure how to format these but I hate working with tables so maybe a list??
+  //     // this would be the component for the individual transaction item. Ideally pull transactions from DB and map over them to make this compoennt for each one and pass data as props to this.
+  //     <li className="transaction-item">temporary text{user.id}</li>
+  //   )
+  // }
+
+//I never learned React Hooks (T.T) but this the way I normally do to fetch data from backend
+  const Transaction = () => {
+    let [transactionsData, setTransactionsData] = useState("")
+    const { userID } = useContext(UserContext);
+  
+    useEffect(() => {
+      fetchTransactions(`${config.API_ENDPOINT}/userID/transactions`)
+        .then(value => setTransactionsData((value)))
+        .then((res) => {
+          if (!res.ok) return res.json().then(e => Promise.reject(e));
+          return res.json();
+        })
+        .then((transactions) => {
+          this.setState({ transactions });
+        })
+        .catch(error => {
+          console.error({ error });
+        });
+    })
   }
-
-
 
 
 async function fetchTransactions(userID, account, sort){
@@ -85,8 +105,9 @@ async function fetchTransactions(userID, account, sort){
   }
 
 
-  let response = await fetch('https://localhost:8000/'+userID)
-
+  // let response = await fetch('https://localhost:8000/'+userID)
+  //replaced localhost with heroku URL stored in config.js
+  let response = await fetch(`${config.API_ENDPOINT}/`+userID)
 
   let result = await response.json();
 
