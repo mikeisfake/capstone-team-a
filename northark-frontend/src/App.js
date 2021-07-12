@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
+import Navbar from './components/NavBar';
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login';
 
@@ -73,12 +73,14 @@ function App() {
       <div className="App">
 
         <Router>
-            <Switch>
-              <Route exact path='/' />
-              <Route exact path='/' />
-              <Route exact path='/' />
-              <Route exact path='/' />
-            </Switch>
+          <NavBar />
+
+          <Switch>
+            <Route exact path='/' />
+            <Route exact path='/' />
+            <Route exact path='/' />
+            <Route exact path='/' />
+          </Switch>
         </Router>
 
          <Login />
