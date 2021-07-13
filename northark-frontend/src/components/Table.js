@@ -1,5 +1,4 @@
 import React from 'react';
-import './Table.css';
 import config from '../config'
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
@@ -95,28 +94,41 @@ const Table = (props) => {
       <tr key={id}>
         <td>{date}</td>
         <td>{transaction}</td>
-        <td>{credit}</td>
-        <td>{debit}</td>
+        <td className="Profit">{credit}</td>
+        <td className="Expense">{debit}</td>
         <td>{balance.toFixed(2)}</td>
       </tr>
     )
   })
 
+
+  /*
+  Table container and Reports container classes should be moved outside 
+  once we have components actually calling table.
+
+  */
+
   return (
-    <div>
-      <h1 id='title'>Transaction Table</h1>
-      <table id='transactions'>
-        <tbody>
-          <tr>
-            <th>Date</th>
-            <th>Transaction</th>
-            <th>Credit</th>
-            <th>Debit</th>
-            <th>Balance</th>
-          </tr>
-          {data}
-        </tbody>
-      </table>
+    <div className="Reports-Container">
+      <div className="Accounts-Container">Accounts
+        <div><button className="Account">Ark Checkings</button></div>
+        <div><button className="Account">Ark Savings</button></div>
+      </div>
+      <div className="Table-Container">
+        <h3 id='title'>Account Title</h3>
+        <table id='transactions'>
+          <tbody>
+            <tr>
+              <th>Date</th>
+              <th>Transaction</th>
+              <th>Credit</th>
+              <th>Debit</th>
+              <th>Balance</th>
+            </tr>
+            {data}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

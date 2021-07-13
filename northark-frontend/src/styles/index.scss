@@ -5,6 +5,155 @@
 @use './pages/dashboard';
 @use './pages/login';
 
-body {
-  font-family: fonts.$sans-serif;
+:root{
+  font-size: 16px;
 }
+
+body {
+
+  font-size: 1rem;
+  color: rgb(27, 27, 27);
+  font-family: Verdana, Arial, Helvetica, sans-serif; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: auto;
+  text-align: center;
+}
+
+nav{
+  background: rgb(27, 54, 90);
+  color: rgb(221, 221, 221);
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  padding: 1rem 2rem 1rem 2rem;
+
+}
+
+nav>h1{
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.Navbar-Logo{
+
+}
+
+.Navbar-Buttons{
+  display: grid;
+  grid-auto-flow: column;
+  gap: 2rem;
+}
+
+.Navbar-Button{
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+.Front-Container{
+  text-align: center;
+
+}
+
+
+.Login-Form{
+  margin: auto;
+  width: 15rem;
+  margin-top: 20vh;
+
+}
+
+.Login-Field{
+  font-size: 1.2rem;
+  padding: 8px 22px;
+  margin: 8px 0 8px;
+  width: 100%;
+}
+
+.Login-Submit{
+  font-size: 1rem;
+  
+  padding: 6px 20px;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+
+
+
+/*
+Defines relative layout of the table to
+the account selection area.*/
+.Reports-Container{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  padding: 1.5rem 1rem 0 1rem;
+  height: 80%;
+
+}
+
+
+.Accounts-Container{
+  text-align: left;
+  font-size: 2rem;
+}
+
+.Account{
+  padding-left: 1rem;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+}
+
+
+/* Table container would hold the table as well as
+the title of the table and its
+sort options */
+.Table-Container{
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+  padding-bottom: 2rem;
+}
+
+table{
+text-align: left;
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+width: 100%;
+
+}
+
+/* Data titles, rows, and entries*/
+
+th, td{
+  padding: 0.75rem;
+}
+
+th{
+}
+
+tr{
+
+}
+
+td{
+  font-size: .8rem;
+
+}
+
+
+.Profit{
+  color: green;
+
+}
+
+.Expense{
+  color: red;
+}
+
+

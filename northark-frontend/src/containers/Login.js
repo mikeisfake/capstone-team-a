@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext'
+import { UserContext } from '../contexts/UserContext';
 import axios from 'axios'
 
 const Login = () => {
@@ -45,23 +45,27 @@ const Login = () => {
 
   if (!userState.loggedin) {
     return(
-      <div id="login">
+      <div id="login" className="Front-Container">
+        <div className="Login-Form">
           <input
             type="text"
             placeholder="email"
             name = 'email'
             value={inputValue.email}
+            class="Login-Field"
             onChange={handleInput}
           />
           <input
             type="password"
             placeholder="password"
             name='password'
+            class="Login-Field"
             value={inputValue.password}
             onChange={handleInput}
           />
-          <button onClick={handleLogin}>login</button>
+          <button className="Login-Submit" onClick={handleLogin}>login</button>
           {error? error: ''}
+          </div>
         </div>
     )
   }

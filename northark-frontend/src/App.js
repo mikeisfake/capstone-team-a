@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Navbar from './components/NavBar';
+import { NavBar } from './components/NavBar';
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login';
 
@@ -73,7 +73,6 @@ function App() {
       <div className="App">
 
         <Router>
-          <NavBar />
 
           <Switch>
             <Route exact path='/' />
@@ -85,7 +84,7 @@ function App() {
 
          <Login />
          {userState.loggedin? accountsList: ''}
-         <button onClick={fetchTransactions}>get transactoins</button>
+         <button onClick={fetchTransactions}>get transactions</button>
       </div>
 
   );

@@ -1,24 +1,17 @@
+import React from 'react';
+import { Link } from 'react-router-dom'
+
+
 export const NavBar = props => {
   return(
     <React.Fragment>
       <nav>
-        <ul>
-          <li>
-            <Link to='/'> NorthArk </Link>
-          </li>
-
-          <li>
-            <Link to='/'> Link 1 </Link>
-          </li>
-
-          <li>
-            <Link to='/'> Link 2 </Link>
-          </li>
-
-          <li>
-            <Link to='/'> Link 3 </Link>
-          </li>
-        </ul>
+          <h1>NorthArk</h1>
+      <div className="Navbar-Buttons">
+        <button className="Navbar-Button">Example</button>
+        <button className="Navbar-Button">Settings</button>
+        <button className="Navbar-Button">Log Out</button>
+      </div>
       </nav>
     </React.Fragment>
   )
