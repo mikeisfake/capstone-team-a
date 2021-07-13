@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext'
-import axios from 'axios'
+// import axios from 'axios'
 
 const Login = () => {
 
@@ -20,23 +20,23 @@ const Login = () => {
     })
   }
 
-  const handleLogin = async () => {
-    const { email, password } = inputValue;
-    try {
-      const response = await axios.post('https://pristine-yosemite-12350.herokuapp.com/users/login', 
-      {email,password} 
-      )
-      localStorage.setItem('JWT', response.data.token);
-      setUserState(userState=>({...userState, loggedin: true}))
-      setInputValue(initialValue);
-      setError('')
-    } catch (error){
-        console.error(error.response.data)
-        if (error.response.data==='this email not exist' || error.response.data==='passwords do not match') {
-            setError(error.response.data);
-        }
-    }
-  }
+  // const handleLogin = async () => {
+  //   const { email, password } = inputValue;
+  //   try {
+  //     const response = await axios.post('https://pristine-yosemite-12350.herokuapp.com/users/login', 
+  //     {email,password} 
+  //     )
+  //     localStorage.setItem('JWT', response.data.token);
+  //     setUserState(userState=>({...userState, loggedin: true}))
+  //     setInputValue(initialValue);
+  //     setError('')
+  //   } catch (error){
+  //       console.error(error.response.data)
+  //       if (error.response.data==='this email not exist' || error.response.data==='passwords do not match') {
+  //           setError(error.response.data);
+  //       }
+  //   }
+  // }
 
   const handleLogout = () => {
     localStorage.removeItem('JWT');
@@ -60,7 +60,7 @@ const Login = () => {
             value={inputValue.password}
             onChange={handleInput}
           />
-          <button onClick={handleLogin}>login</button>
+          {/* <button onClick={handleLogin}>login</button> */}
           {error? error: ''}
         </div>
     )
