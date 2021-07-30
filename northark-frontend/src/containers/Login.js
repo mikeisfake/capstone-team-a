@@ -73,7 +73,6 @@ const Login = () => {
 
 
 
-  if (!userState.loggedin) {
     return(
       <div id="login" className="Front-Container">
         <div className="Login-Form">
@@ -98,7 +97,9 @@ const Login = () => {
           </div>
         </div>
     )
-  }
+
+
+    /*
   return (
     <div>
     Welcome, {userState.name}<button onClick={handleLogout}>Log Out</button>
@@ -106,6 +107,7 @@ const Login = () => {
     </div>
     
   )
+  */
   
 }
 

@@ -1,22 +1,24 @@
 import { NavBar } from './NavBar';
 import { useContext } from 'react'
-import { UserContextProvider, TransactionsContextProvider } from '../contexts/UserContext';
+import { UserContextProvider, TransactionsContextProvider, SectionContextProvider } from '../contexts/UserContext';
 
 const Layout = ({ children }) => {
 
   //we should have a function to check if logged in here maybe?
 
   return (
-    <UserContextProvider>
-      <TransactionsContextProvider>
-        <div id="layout">
-          <NavBar />
-          { children }
-          <footer>
-          </footer>
-        </div>
-      </TransactionsContextProvider>
-    </UserContextProvider>
+    <SectionContextProvider>
+      <UserContextProvider>
+        <TransactionsContextProvider>
+          <div id="layout">
+            <NavBar />
+            { children }
+            <footer>
+            </footer>
+          </div>
+        </TransactionsContextProvider>
+      </UserContextProvider>
+    </SectionContextProvider>
   )
 }
 export default Layout

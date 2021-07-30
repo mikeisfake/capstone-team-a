@@ -12,6 +12,18 @@ function TransactionsContextProvider(props) {
   )
 }
 
+const SectionContext=createContext();
+
+function SectionContextProvider(props){
+  const [sectionState, setSectionState]=useState("Home")
+
+  return(
+    <SectionContext.Provider value={[sectionState, setSectionState]}>
+      {props.children}
+    </SectionContext.Provider>
+  )
+}
+
 
 const UserContext = createContext([{}, ()=>{}])
 
@@ -49,4 +61,4 @@ function UserContextProvider (props) {
   )
 }
 
-export { UserContext, UserContextProvider, TransactionsContext, TransactionsContextProvider }
+export { UserContext, UserContextProvider, TransactionsContext, TransactionsContextProvider, SectionContext, SectionContextProvider }

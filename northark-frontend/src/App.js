@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { NavBar } from './components/NavBar';
+import SectionFlow from './components/SectionFlow';
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login';
 
@@ -13,6 +13,7 @@ import './styles/index.scss';
 function App() {
   const [transactions, setTransactions] = useContext(TransactionsContext);
   const [userState, setUserState] = useContext(UserContext);
+  const [sectionState, setSectionState] = useState("Home")
 
 
 
@@ -35,7 +36,7 @@ function App() {
 
   return (
       <div className="App">
-         <Login />
+        <SectionFlow/>
         {JSON.stringify(userState)}
          {userState.loggedin? accountsList: ''}
       </div>

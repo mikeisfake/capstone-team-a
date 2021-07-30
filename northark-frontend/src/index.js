@@ -9,7 +9,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Layout>
       <App />
-      <Table />
     </Layout>
   </React.StrictMode>,
   document.getElementById('root')
