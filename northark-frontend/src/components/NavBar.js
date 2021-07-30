@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../contexts/UserContext'
+import { UserContext, SectionContext } from '../contexts/UserContext'
 
 
 export const NavBar = props => {
 
   const [userState, setUserState] = useContext(UserContext);
+  const [sectionState, setSectionState] = useContext(SectionContext)
 
   const handleLogout = () => {
     localStorage.removeItem('JWT');
     setUserState(userState=>({...userState, loggedin: false, accounts:[]}))
+    setSectionState("Home")
   }
 
 

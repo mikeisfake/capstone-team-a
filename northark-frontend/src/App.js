@@ -34,13 +34,20 @@ function App() {
     
   
 
+
+
+  useEffect (()=>{
+
+    if (!userState.loggedin){
+      setTransactions("")
+  }
+
+  }, [userState.loggedin])
+
   return (
       <div className="App">
         <SectionFlow/>
-        {JSON.stringify(userState)}
-         {userState.loggedin? accountsList: ''}
       </div>
-
   );
 }
 

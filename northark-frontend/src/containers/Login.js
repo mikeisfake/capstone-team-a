@@ -30,6 +30,29 @@ const Login = () => {
       setUserState(userState=>({...userState, loggedin: true}))
       setInputValue(initialValue);
       setError('')
+
+      
+      const token = localStorage.getItem('JWT');
+      const fetchAccounts =  async () =>{
+        const response = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findaccountsbycustomer', {
+            headers: {Authorization: "JWT " + token},
+            },);
+        if (response.status !== 200) {
+              setUserState(userState=> ({...userState, loggedin: false, name: '', customerId:'', phone:'', email:''}));
+        } else {
+            const data = await response.json();
+            setUserState(userState=> ({...userState, 
+              loggedin: true, 
+              name: data.accounts[0].name, 
+              customerId:data.accounts[0].id, 
+              phone:data.accounts[0].phone, 
+              email:data.accounts[0].email,
+              accounts: data.accounts[0].Accounts
+            }));
+        }
+        };
+        fetchAccounts()
+
     } catch (error){
         console.error(error.response.data)
         if (error.response.data==='this email not exist' || error.response.data==='passwords do not match') {
@@ -38,13 +61,9 @@ const Login = () => {
     }
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem('JWT');
-    setUserState(userState=>({...userState, loggedin: false, accounts:[]}))
-  }
 
 
-
+  /*
   useEffect (()=>{
     const token = localStorage.getItem('JWT');
     const fetchAccounts =  async () =>{
@@ -69,7 +88,8 @@ const Login = () => {
       fetchAccounts()
   }, [userState.loggedin])
 
-  
+  */
+
 
 
 

@@ -46,6 +46,33 @@ When replacing the fake data, could do something like this from Transaction.js:
 
 // TEMPORARY, USE TO PASS FAKE DATA
 const DataForTable = () => {
+
+  const [transactions, setTransactions] = useContext(TransactionsContext);
+
+  
+  const fetchTransactions = async () => {
+    const token = localStorage.getItem('JWT');
+    const res = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findtransbycustomer', {
+      headers: {Authorization: "JWT " + token},
+    });
+    if (res.status !== 200){
+      setTransactions([])
+    } else {
+      const data = await res.json();
+      console.log(JSON.stringify(data))
+      setTransactions(data.trans[0].Accounts)
+      /* The data excluded by adding [0] and .Accounts to the fetch can be found in UserState.*/
+    }
+  }
+
+  
+  useEffect (()=>{
+
+    fetchTransactions()
+
+  }, [])
+
+
   const data = [
     {
       id: 1,
@@ -80,40 +107,54 @@ const DataForTable = () => {
       balance: 3460.70
     }
   ]
+
+
+  if (transactions){
+    return(
+    <Table data={transactions[0].Transactions} />
+    )
+  }
+
   return (
-    <Table data={data} />
+    <div>Loading transactions....
+    </div>
   )
+
+
 }
+
+
+/*
+        <td>{balance.toFixed(2)}</td>
+*/
 
 const Table = (props) => {
 
-  const [transactions, setTransactions] = useContext(TransactionsContext);
-
-  
-  const fetchTransactions = async () => {
-    const token = localStorage.getItem('JWT');
-    const res = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findtransbycustomer', {
-      headers: {Authorization: "JWT " + token},
-    });
-    if (res.status !== 200){
-      setTransactions([])
-    } else {
-      const data = await res.json();
-      setTransactions(data.trans[0].Accounts)
-      /* The data excluded by adding [0] and .Accounts to the fetch can be found in UserState.*/
-    }
-  }
+  let balance=0
 
   const data = props.data.map((transactions) => {
-    const { id, date, transaction, credit, debit, balance } = transactions
+    const { id, createdAt, TransactionType, amount } = transactions
+    let credit
+    let debit
+    let TransactionDescription
+    if(TransactionType.description==="deposit"){
+      credit=amount
+      balance=+credit
+      TransactionDescription="Deposit"
+    }else{
+      debit=amount
+      balance=-debit
+      TransactionDescription="Withdrawel"
+    }
+
 
     return (
       <tr key={id}>
-        <td>{date}</td>
-        <td>{transaction}</td>
+        <td>{createdAt}</td>
+        <td>{TransactionDescription}</td>
         <td className="Profit">{credit}</td>
         <td className="Expense">{debit}</td>
-        <td>{balance.toFixed(2)}</td>
+        <td>{balance}</td>
       </tr>
     )
   })
@@ -126,30 +167,26 @@ const Table = (props) => {
   */
 
   return (
-    <div>
-      <div className="Reports-Container">
-        <div className="Accounts-Container">Accounts
-          <div><button className="Account">Ark Checkings</button></div>
-          <div><button className="Account">Ark Savings</button></div>
-        </div>
-        <div className="Table-Container">
-          <h3 id='title'>Account Title</h3>
-          <table id='transactions'>
-            <tbody>
-              <tr>
-                <th>Date</th>
-                <th>Transaction</th>
-                <th>Credit</th>
-                <th>Debit</th>
-                <th>Balance</th>
-              </tr>
-              {data}
-            </tbody>
-          </table>
-        </div>
+    <div className="Reports-Container">
+      <div className="Accounts-Container">Accounts
+        <div><button className="Account">Ark Checkings</button></div>
+        <div><button className="Account">Ark Savings</button></div>
       </div>
-      <button onClick={fetchTransactions}>get transactions</button>
-      {JSON.stringify(transactions)}
+      <div className="Table-Container">
+        <h3 id='title'>Account Title</h3>
+        <table id='transactions'>
+          <tbody>
+            <tr>
+              <th>Date</th>
+              <th>Transaction</th>
+              <th>Credit</th>
+              <th>Debit</th>
+              <th>Balance</th>
+            </tr>
+            {data}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

@@ -29,7 +29,7 @@ export default function SectionFlow(props){
 
 
     return(
-        <div>An error with page routing has occured.</div>
+        <div>An error with page routing has occured. Current section state is:{JSON.stringify(sectionState)}</div>
     )
 
 }
