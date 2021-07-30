@@ -1,6 +1,6 @@
 import { NavBar } from './NavBar';
 import { useContext } from 'react'
-import { UserContextProvider } from '../contexts/UserContext';
+import { UserContextProvider, TransactionsContextProvider } from '../contexts/UserContext';
 
 const Layout = ({ children }) => {
 
@@ -8,12 +8,14 @@ const Layout = ({ children }) => {
 
   return (
     <UserContextProvider>
-      <div id="layout">
-        <NavBar />
-        { children }
-        <footer>
-        </footer>
-      </div>
+      <TransactionsContextProvider>
+        <div id="layout">
+          <NavBar />
+          { children }
+          <footer>
+          </footer>
+        </div>
+      </TransactionsContextProvider>
     </UserContextProvider>
   )
 }

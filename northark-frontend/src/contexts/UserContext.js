@@ -1,6 +1,20 @@
 import { createContext, useState } from 'react'
 
+const TransactionsContext=createContext();
+
+function TransactionsContextProvider(props) {
+  const [transactionsState, setTransactionsState]=useState("")
+
+  return(
+    <TransactionsContext.Provider value={[transactionsState, setTransactionsState]}>
+      {props.children}
+    </TransactionsContext.Provider>
+  )
+}
+
+
 const UserContext = createContext([{}, ()=>{}])
+
 
 function UserContextProvider (props) {
   const [userState, setUserState] = useState({
@@ -35,4 +49,4 @@ function UserContextProvider (props) {
   )
 }
 
-export { UserContext, UserContextProvider }
+export { UserContext, UserContextProvider, TransactionsContext, TransactionsContextProvider }

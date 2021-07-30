@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../config'
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import { UserContext, TransactionsContext } from '../contexts/UserContext';
 //config.js stores the heroku URL
 
 /*
@@ -87,6 +87,23 @@ const DataForTable = () => {
 
 const Table = (props) => {
 
+  const [transactions, setTransactions] = useContext(TransactionsContext);
+
+  
+  const fetchTransactions = async () => {
+    const token = localStorage.getItem('JWT');
+    const res = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findtransbycustomer', {
+      headers: {Authorization: "JWT " + token},
+    });
+    if (res.status !== 200){
+      setTransactions([])
+    } else {
+      const data = await res.json();
+      setTransactions(data.trans[0].Accounts)
+      /* The data excluded by adding [0] and .Accounts to the fetch can be found in UserState.*/
+    }
+  }
+
   const data = props.data.map((transactions) => {
     const { id, date, transaction, credit, debit, balance } = transactions
 
@@ -109,26 +126,30 @@ const Table = (props) => {
   */
 
   return (
-    <div className="Reports-Container">
-      <div className="Accounts-Container">Accounts
-        <div><button className="Account">Ark Checkings</button></div>
-        <div><button className="Account">Ark Savings</button></div>
+    <div>
+      <div className="Reports-Container">
+        <div className="Accounts-Container">Accounts
+          <div><button className="Account">Ark Checkings</button></div>
+          <div><button className="Account">Ark Savings</button></div>
+        </div>
+        <div className="Table-Container">
+          <h3 id='title'>Account Title</h3>
+          <table id='transactions'>
+            <tbody>
+              <tr>
+                <th>Date</th>
+                <th>Transaction</th>
+                <th>Credit</th>
+                <th>Debit</th>
+                <th>Balance</th>
+              </tr>
+              {data}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div className="Table-Container">
-        <h3 id='title'>Account Title</h3>
-        <table id='transactions'>
-          <tbody>
-            <tr>
-              <th>Date</th>
-              <th>Transaction</th>
-              <th>Credit</th>
-              <th>Debit</th>
-              <th>Balance</th>
-            </tr>
-            {data}
-          </tbody>
-        </table>
-      </div>
+      <button onClick={fetchTransactions}>get transactions</button>
+      {JSON.stringify(transactions)}
     </div>
   )
 }
