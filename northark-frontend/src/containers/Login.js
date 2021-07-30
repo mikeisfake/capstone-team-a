@@ -7,9 +7,9 @@ const Login = () => {
   
   const initialValue = {email:'', password:''};
   const [inputValue, setInputValue] = useState(initialValue);
-  const [userState, setUserState] = useContext(UserContext);
   const [error, setError] = useState('')
 
+  const [userState, setUserState] = useContext(UserContext);
 
 
   

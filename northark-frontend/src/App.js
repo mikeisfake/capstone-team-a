@@ -4,7 +4,7 @@ import SectionFlow from './components/SectionFlow';
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login';
 
-import { UserContext, TransactionsContext } from './contexts/UserContext'
+import { UserContext, TransactionsContext, SectionContext } from './contexts/UserContext'
 
 import './styles/index.scss';
 
@@ -13,7 +13,7 @@ import './styles/index.scss';
 function App() {
   const [transactions, setTransactions] = useContext(TransactionsContext);
   const [userState, setUserState] = useContext(UserContext);
-  const [sectionState, setSectionState] = useState("Home")
+  const [sectionState, setSectionState] = useContext(SectionContext)
 
 
 
