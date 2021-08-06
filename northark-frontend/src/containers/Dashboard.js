@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext'
 
 import AccountList from '../components/AccountList';
-import Transaction from '../components/Transaction'
+import Transaction from '../components/Unused'
 
 const Dashboard = () => {
 

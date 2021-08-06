@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import Login from '../containers/Login';
 import { UserContext, SectionContext } from '../contexts/UserContext'
-import Table from './Table';
+import Table from './Transaction';
 import LandingPage from './Landing';
 
 
