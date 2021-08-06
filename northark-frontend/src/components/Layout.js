@@ -7,8 +7,8 @@ const Layout = ({ children }) => {
   //we should have a function to check if logged in here maybe?
 
   return (
+  <UserContextProvider>
     <SectionContextProvider>
-      <UserContextProvider>
         <TransactionsContextProvider>
           <div id="layout">
             <NavBar />
@@ -17,8 +17,8 @@ const Layout = ({ children }) => {
             </footer>
           </div>
         </TransactionsContextProvider>
-      </UserContextProvider>
     </SectionContextProvider>
+  </UserContextProvider>
   )
 }
 export default Layout
