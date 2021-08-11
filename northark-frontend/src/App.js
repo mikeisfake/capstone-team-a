@@ -4,7 +4,7 @@ import SectionFlow from './components/SectionFlow';
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login';
 
-import { UserContext, TransactionsContext, SectionContext } from './contexts/UserContext'
+import { UserContext, TransactionsContext, SectionContext } from './contexts/Contexts'
 
 import './styles/index.scss';
 

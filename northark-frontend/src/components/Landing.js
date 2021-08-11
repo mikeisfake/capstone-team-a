@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { UserContext, SectionContext } from '../contexts/UserContext'
+import { UserContext, SectionContext } from '../contexts/Contexts'
 
 
 export default function LandingPage(props){

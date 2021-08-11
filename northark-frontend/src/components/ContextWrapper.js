@@ -1,6 +1,6 @@
 import { NavBar } from './NavBar';
 import { useContext } from 'react'
-import { UserContextProvider, TransactionsContextProvider, SectionContextProvider } from '../contexts/UserContext';
+import { UserContextProvider, TransactionsContextProvider, SectionContextProvider } from '../contexts/Contexts';
 
 const ContextWrapper = ({ children }) => {
 

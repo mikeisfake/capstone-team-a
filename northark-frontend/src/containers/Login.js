@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from '../contexts/Contexts';
 import axios from 'axios'
 
 const Login = () => {
@@ -48,7 +48,7 @@ const Login = () => {
 
 
 
-  
+
   const handleLogin = async () => {
     const { email, password } = inputValue;
     try {
@@ -105,6 +105,14 @@ const Login = () => {
   */
 
 
+
+  /*
+If this component gets more complicated, it would be best to split it into two components.
+One component for login logic that calls the login form, and the other that runs the login form
+based on some props passed to it(like handleLogin).
+
+But for now, that would be a bit overkill.
+  */
 
 
     return(

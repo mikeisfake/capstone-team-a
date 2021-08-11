@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { UserContext } from '../contexts/UserContext'
+import { UserContext } from '../contexts/Contexts'
 import React, { useEffect, useState } from 'react';
 import config from '../config';
 

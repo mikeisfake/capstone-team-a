@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../config'
 import { useState, useEffect, useContext } from 'react';
-import { UserContext, TransactionsContext } from '../contexts/UserContext';
+import { UserContext, TransactionsContext } from '../contexts/Contexts';
 //config.js stores the heroku URL
 
 
