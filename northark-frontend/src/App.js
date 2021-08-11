@@ -35,6 +35,13 @@ function App() {
   
 
 
+  const handleLogout = () => {
+    localStorage.removeItem('JWT');
+    setUserState(userState=>({...userState, loggedin: false, accounts:[]}))
+    setSectionState("Home")
+  }
+
+
 
   useEffect (()=>{
 
@@ -44,8 +51,11 @@ function App() {
 
   }, [userState.loggedin])
 
+
+
   return (
       <div className="App">
+        <NavBar handleLogout={handleLogout}/>
         <SectionFlow/>
       </div>
   );
