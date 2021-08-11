@@ -8,9 +8,9 @@ export default function LandingPage(props){
 
 
     return(
-        <div>
+        <div className="Landing">
         <div>Welcome, {userState.name}!</div>
-        <button onClick={()=>{setSectionState("Transactions")}}>View Transaction History</button>
+        <button className="Landing-Transaction-Button" onClick={()=>{setSectionState("Transactions")}}>View Transaction History</button>
         </div>
     )
 

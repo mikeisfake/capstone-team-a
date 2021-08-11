@@ -38,8 +38,19 @@ const Login = () => {
 
     } catch (error){
         console.error(error.response.data)
-        if (error.response.data==='this email not exist' || error.response.data==='passwords do not match') {
-            setError(error.response.data);
+        switch(error.response.data){
+          case 'this email not exist':
+            setError("This email doesn't exist.")
+            break;
+          case 'passwords do not match':
+            setError("Incorrect password.")
+            break;
+          case 'Missing credentials':
+            setError("Incomplete form.")
+            break;
+          default:
+            setError("")
+            break;
         }
     }
   }
@@ -117,7 +128,7 @@ But for now, that would be a bit overkill.
             onChange={handleInput}
           />
           <button className="Login-Submit" onClick={handleLogin}>login</button>
-          {error? error: ''}
+          <div className="Error">{error? error: ''}</div>
           </div>
         </div>
     )
