@@ -199,3 +199,50 @@ td{
 }
 
 
+
+@media (max-width:600px){
+
+
+nav{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+nav>h1{
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0;
+  margin-right: 1.5rem;
+}
+
+.Navbar-Buttons{
+  gap: 0.5rem;
+}
+
+
+.Accounts-Container{
+  text-align: left;
+  font-size: 2rem;
+  margin: auto;
+}
+
+  .Reports-Container{
+    display: grid;
+    grid-template-columns: auto;
+    padding: 1.5rem 1rem 0 1rem;
+    height: 80%;
+  
+  }
+  
+
+  th, td{
+    padding: 0.25rem;
+  }
+  
+
+}
+
+
+@media (max-width:450px){
+
+}
