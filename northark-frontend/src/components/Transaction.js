@@ -17,20 +17,24 @@ const Transactions = () => {
     const res = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findtransbycustomer', {
       headers: {Authorization: "JWT " + token},
     });
+
     if (res.status !== 200){
       setTransactions([])
     } else {
       const data = await res.json();
-      console.log(JSON.stringify(data))
       setTransactions(data.trans[0].Accounts)
+
       /* The data excluded by adding "[0].Accounts" to the fetch can be found in UserState. That specific subsection gets us to the transaction data.
       Data traversal looks like: If you wanted to get account #5's transactions, the code would be: data.trans[0].Accounts.find(x => x.id ===5).Transactions
       This is assuming you're using the fetch above.
       You could also simply do data.trans[0].Accounts.[1].Transactions, where the [1] is just determined by something like "This is this user's second account, so it would be 0".
       */
     }
+
   }
 
+
+  
   
   useEffect (()=>{
 
@@ -41,17 +45,17 @@ const Transactions = () => {
 
 
 
-  if (transactions){
-    return(
-    <Table data={transactions[0].Transactions} />
-    )
-  }
-
   /*
   For now, it is just getting the first account's transactions, thus [0].Transactions.
   Account selection should be added later, changing which index is put into [#].
   */
 
+
+  if (transactions){
+    return(
+    <Table data={transactions[0].Transactions} />
+    )
+  }
 
   return (
     <div>Loading transactions....
@@ -71,6 +75,7 @@ const Table = (props) => {
     let credit
     let debit
     let TransactionDescription
+
     if(TransactionType.description==="deposit"){
       credit=amount
       balance=+credit
@@ -83,7 +88,6 @@ const Table = (props) => {
 
     let dateConverted=new Date(createdAt)
     let date=""+dateConverted.getUTCDate()+"/"+dateConverted.getUTCMonth()+"/"+dateConverted.getUTCFullYear()
-
 
 
     return (

@@ -11,15 +11,13 @@ export const NavBar = props => {
 
 
   return(
-    <React.Fragment>
       <nav>
-            <h1>NorthArk</h1>
+        <h1>NorthArk</h1>
         <div className="Navbar-Buttons">
           <button className="Navbar-Button" onClick={()=>{setSectionState("Home")}}>Home</button>
           <button className="Navbar-Button">Settings</button>
           <button className="Navbar-Button" onClick={props.handleLogout}>Log Out</button>
         </div>
       </nav>
-    </React.Fragment>
   )
 }

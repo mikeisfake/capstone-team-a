@@ -12,30 +12,6 @@ const Login = () => {
   const [userState, setUserState] = useContext(UserContext);
 
 
-  const fetchAccounts =  async () =>{
-    const token = localStorage.getItem('JWT');
-    const response = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findaccountsbycustomer', {
-        headers: {Authorization: "JWT " + token},
-        },);
-    if (response.status !== 200) {
-          setUserState(userState=> ({...userState, loggedin: false, name: '', customerId:'', phone:'', email:''}));
-          localStorage.removeItem('JWT');
-    } else {
-        const data = await response.json();
-        setUserState(userState=> ({...userState, 
-          loggedin: true, 
-          name: data.accounts[0].name, 
-          customerId:data.accounts[0].id, 
-          phone:data.accounts[0].phone, 
-          email:data.accounts[0].email,
-          accounts: data.accounts[0].Accounts
-        }));
-        setInputValue(initialValue);
-        setError('')
-    }
-    };
-
-
 
 
   
@@ -51,6 +27,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const { email, password } = inputValue;
+    
     try {
       const response = await axios.post('https://pristine-yosemite-12350.herokuapp.com/users/login', 
       {email,password} 
@@ -72,8 +49,41 @@ const Login = () => {
 
 
     fetchAccounts()
+    /* This allows login to be remembered when a user returns, by checking for the localstorage token.*/
 
   }, [])
+
+
+  
+  const fetchAccounts =  async () =>{
+
+    const token = localStorage.getItem('JWT');
+
+    const response = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findaccountsbycustomer', {
+        headers: {Authorization: "JWT " + token},
+        },);
+        
+    if (response.status !== 200) {
+          setUserState(userState=> ({...userState, loggedin: false, name: '', customerId:'', phone:'', email:''}));
+          localStorage.removeItem('JWT');
+    } else {
+        const data = await response.json();
+        setUserState(userState=> ({...userState, 
+          loggedin: true, 
+          name: data.accounts[0].name, 
+          customerId:data.accounts[0].id, 
+          phone:data.accounts[0].phone, 
+          email:data.accounts[0].email,
+          accounts: data.accounts[0].Accounts
+        }));
+        setInputValue(initialValue);
+        setError('')
+    }
+
+
+    };
+
+
 
 
 
