@@ -23,7 +23,11 @@ const Transactions = () => {
       const data = await res.json();
       console.log(JSON.stringify(data))
       setTransactions(data.trans[0].Accounts)
-      /* The data excluded by adding [0] and .Accounts to the fetch can be found in UserState.*/
+      /* The data excluded by adding "[0].Accounts" to the fetch can be found in UserState. That specific subsection gets us to the transaction data.
+      Data traversal looks like: If you wanted to get account #5's transactions, the code would be: data.trans[0].Accounts.find(x => x.id ===5).Transactions
+      This is assuming you're using the fetch above.
+      You could also simply do data.trans[0].Accounts.[1].Transactions, where the [1] is just determined by something like "This is this user's second account, so it would be 0".
+      */
     }
   }
 
@@ -42,6 +46,12 @@ const Transactions = () => {
     <Table data={transactions[0].Transactions} />
     )
   }
+
+  /*
+  For now, it is just getting the first account's transactions, thus [0].Transactions.
+  Account selection should be added later, changing which index is put into [#].
+  */
+
 
   return (
     <div>Loading transactions....

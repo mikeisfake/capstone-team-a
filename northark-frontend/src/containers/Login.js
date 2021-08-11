@@ -77,34 +77,6 @@ const Login = () => {
 
 
 
-  /*
-  useEffect (()=>{
-    const token = localStorage.getItem('JWT');
-    const fetchAccounts =  async () =>{
-      const response = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findaccountsbycustomer', {
-          headers: {Authorization: "JWT " + token},
-          },);
-      if (response.status !== 200) {
-            setUserState(userState=> ({...userState, loggedin: false, name: '', customerId:'', phone:'', email:''}));
-      } else {
-          const data = await response.json();
-          setUserState(userState=> ({...userState, 
-            loggedin: true, 
-            name: data.accounts[0].name, 
-            customerId:data.accounts[0].id, 
-            phone:data.accounts[0].phone, 
-            email:data.accounts[0].email,
-            accounts: data.accounts[0].Accounts
-          }));
-      }
-      
-      };
-      fetchAccounts()
-  }, [userState.loggedin])
-
-  */
-
-
 
   /*
 If this component gets more complicated, it would be best to split it into two components.
@@ -141,16 +113,6 @@ But for now, that would be a bit overkill.
     )
 
 
-    /*
-  return (
-    <div>
-    Welcome, {userState.name}<button onClick={handleLogout}>Log Out</button>
-    <hr />
-    </div>
-    
-  )
-  */
-  
 }
 
 export default Login
