@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Layout from './components/Layout';
-import Table from './components/Table';
+import ContextWrapper from './components/ContextWrapper';
+import Table from './components/Transaction';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Layout>
+    <ContextWrapper>
       <App />
-      <Table />
-    </Layout>
+    </ContextWrapper>
   </React.StrictMode>,
   document.getElementById('root')
 );

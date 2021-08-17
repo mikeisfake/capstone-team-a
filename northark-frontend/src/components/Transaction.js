@@ -1,121 +1,132 @@
-import { useContext } from 'react'
-import { UserContext } from '../contexts/UserContext'
-import React, { useEffect, useState } from 'react';
-import config from '../config';
-
-  /*
-Todo for Yuri/Xiang:
-Be aware: Transaction component is for Cesar to handle. Currently Transaction is not rendered, 
-instead the Table component in Table.js(with fake data supplied) is being directly rendered at the moment, which will change.
-
--Change the fetch URL to the heroku URL.
--Adjust how queries are added to the url, based on argument. 
--Adjust any remaining json data parsing needed.
--Add error catching, return error message if not 200.
--For now, no sorting. I just left example code in case.
+import React from 'react';
+import config from '../config'
+import { useState, useEffect, useContext } from 'react';
+import { UserContext, TransactionsContext } from '../contexts/Contexts';
+//config.js stores the heroku URL
 
 
-  */
 
 
-  // export const Transaction = props => {
+const Transactions = () => {
 
-  //   /*
-  //   Context API(ie, user.id below) worked last time Jeffrey checked it(july 5, 4pm PST). But double check if things change.
-  //   */
+  const [transactions, setTransactions] = useContext(TransactionsContext);
 
-
-  //   let [transactionsData, setTransactionsData] = useState("")
-  //   const { user } = useContext(UserContext);
   
-  //   useEffect(()=>{
-  //     fetchTransactions(user.id, 1, "default")
-  //     .then(value=>setTransactionsData((value)))
-  
-      /*
-      Simple example arguments for now. 1 and "default" correspond to account number and sort type.  
-      Needs error handling.
-  
-      Then in the render, 
-      you would map over {transactionsData}, probably. Or convert it in some way, if needed.
-      You cant render {transactinosData} raw by itself, it is an object so React wont render it.
-      So it will need to be turned into something else first, which IIRC map does.
-      
+  const fetchTransactions = async () => {
+    const token = localStorage.getItem('JWT');
+    const res = await fetch('https://pristine-yosemite-12350.herokuapp.com/users/findtransbycustomer', {
+      headers: {Authorization: "JWT " + token},
+    });
+
+    if (res.status !== 200){
+      setTransactions([])
+    } else {
+      const data = await res.json();
+      setTransactions(data.trans[0].Accounts)
+
+      /* The data excluded by adding "[0].Accounts" to the fetch can be found in UserState. That specific subsection gets us to the transaction data.
+      Data traversal looks like: If you wanted to get account #5's transactions, the code would be: data.trans[0].Accounts.find(x => x.id ===5).Transactions
+      This is assuming you're using the fetch above.
+      You could also simply do data.trans[0].Accounts.[1].Transactions, where the [1] is just determined by something like "This is this user's second account, so it would be 0".
       */
-  
-  
-    
-    
-    // },[])
-    
-    
-  
-  //   return (
-  //     // not sure how to format these but I hate working with tables so maybe a list??
-  //     // this would be the component for the individual transaction item. Ideally pull transactions from DB and map over them to make this compoennt for each one and pass data as props to this.
-  //     <li className="transaction-item">temporary text{user.id}</li>
-  //   )
-  // }
+    }
 
-//I never learned React Hooks (T.T) but this the way I normally do to fetch data from backend
-  const Transaction = () => {
-    let [transactionsData, setTransactionsData] = useState("")
-    const { userID } = useContext(UserContext);
-  
-    useEffect(() => {
-      fetchTransactions(`${config.API_ENDPOINT}/userID/transactions`)
-        .then(value => setTransactionsData((value)))
-        .then((res) => {
-          if (!res.ok) return res.json().then(e => Promise.reject(e));
-          return res.json();
-        })
-        .then((transactions) => {
-          this.setState({ transactions });
-        })
-        .catch(error => {
-          console.error({ error });
-        });
-    })
   }
 
 
-async function fetchTransactions(userID, account, sort){
+  
+  
+  useEffect (()=>{
+
+    fetchTransactions()
+
+  }, [])
+
+
 
 
   /*
-  This is an example for how the sort function may work in the future. 
-  Unused for now.
-  If we do this, will have to decide the sorts, their string names, make sure we have the API commands right, etc.
-  The sort should probably be placed in a separate function, leaving here as a quick example
-  since the sort argument needs to be passed to this function.
+  For now, it is just getting the first account's transactions, thus [0].Transactions.
+  Account selection should be added later, changing which index is put into [#].
   */
 
 
-  let sortCommand
-
-  switch (sort){
-    case 'Price-Descending':
-      sortCommand='sort_by=price&order=desc'
-      break;
-    case 'Price-Ascending':
-      sortCommand='sort_by=price&order=asc'
-      break;
-    default:
-      break;
+  if (transactions){
+    return(
+    <Table data={transactions[0].Transactions} />
+    )
   }
 
+  return (
+    <div>Loading transactions....
+    </div>
+  )
 
-  // let response = await fetch('https://localhost:8000/'+userID)
-  //replaced localhost with heroku URL stored in config.js
-  let response = await fetch(`${config.API_ENDPOINT}/`+userID)
-
-  let result = await response.json();
-
-
-  /*
-  Returning a specific account of that userID, so that the tables can show that account's data.
-  */
-  return result.account;
 
 }
 
+
+const Table = (props) => {
+
+  let balance=0
+
+  const data = props.data.map((transactions) => {
+    const { id, createdAt, TransactionType, amount } = transactions
+    let credit
+    let debit
+    let TransactionDescription
+
+    if(TransactionType.description==="deposit"){
+      credit=amount
+      balance=+credit
+      TransactionDescription="Deposit"
+    }else{
+      debit=amount
+      balance=-debit
+      TransactionDescription="Withdrawel"
+    }
+
+    let dateConverted=new Date(createdAt)
+    let date=""+dateConverted.getUTCDate()+"/"+dateConverted.getUTCMonth()+"/"+dateConverted.getUTCFullYear()
+
+
+    return (
+      <tr key={id}>
+        <td>{date}</td>
+        <td>{TransactionDescription}</td>
+        <td className="Profit">{credit}</td>
+        <td className="Expense">{debit}</td>
+        <td>{balance}</td>
+      </tr>
+    )
+  })
+
+
+
+  return (
+    <div className="Reports-Container">
+      <div className="Accounts-Container">Accounts
+        <div><button className="Account">Ark Checkings</button></div>
+        <div><button className="Account">Ark Savings</button></div>
+      </div>
+      <div className="Table-Container">
+        <h3 id='title'>Account Title</h3>
+        <table id='transactions'>
+          <tbody>
+            <tr>
+              <th>Date</th>
+              <th>Transaction</th>
+              <th>Credit</th>
+              <th>Debit</th>
+              <th>Balance</th>
+            </tr>
+            {data}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+
+export default Transactions;
